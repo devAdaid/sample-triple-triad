@@ -4,13 +4,12 @@ using UnityEngine;
 
 namespace Ahyeong.TripleTride
 {
+    [System.Serializable]
     public class TTCard
     {
         public const int MinPower = 1;
         public const int MaxPower = 10;
-
-        public string CardName => cardData.cardName;
-        public Sprite CardSprite => cardData.cardSprite;
+        
         public int RankUp => Mathf.Clamp(cardData.rankUp + rankDifference, MinPower, MaxPower);
         public int RankRight => Mathf.Clamp(cardData.rankRight + rankDifference, MinPower, MaxPower);
         public int RankDown => Mathf.Clamp(cardData.rankDown + rankDifference, MinPower, MaxPower);

@@ -13,7 +13,7 @@ namespace Ahyeong.TripleTride
 
         public TTCardDatabase()
         {
-            TTCardData[] cards = Resources.LoadAll<TTCardData>(dataPath);
+            cardData = Resources.LoadAll<TTCardData>(dataPath);
         }
 
         public List<TTCardData> GetRandomCardData(int dataCount)
@@ -32,7 +32,7 @@ namespace Ahyeong.TripleTride
             {
                 int randomCandidateIndex = Random.Range(0, candidateRange);
                 int newCardIndex = candidates[randomCandidateIndex];
-                Swap(ref candidates[randomCandidateIndex], ref candidates[candidates.Length - 1]);
+                Swap(ref candidates[randomCandidateIndex], ref candidates[candidateRange - 1]);
                 candidateRange -= 1;
 
                 TTCardData newCard = cardData[newCardIndex];

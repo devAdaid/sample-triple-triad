@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace Ahyeong.TripleTride
 {
-    public class TTPlayer : MonoBehaviour
+    [System.Serializable]
+    public class TTPlayer
     {
         public string playerName = string.Empty;
         public int playerNumber = 0;
@@ -16,6 +17,7 @@ namespace Ahyeong.TripleTride
             playerNumber = number;
             playerDeck = deck;
             playerName = name;
+            SetHandWithDeck();
         }
 
         public void SetHandWithDeck()
@@ -31,6 +33,7 @@ namespace Ahyeong.TripleTride
         {
             int removeIndex = playerHand.IndexOf(card);
             playerHand[removeIndex] = null;
+            Debug.Log($"Remove card at {removeIndex}");
         }
 
         public void SetDeck(List<TTCardData> newDeck)

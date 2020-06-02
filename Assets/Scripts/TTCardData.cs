@@ -16,8 +16,6 @@ namespace Ahyeong.TripleTride
     [CreateAssetMenu]
     public class TTCardData : ScriptableObject
     {
-        public string cardName;
-        public Sprite cardSprite;
         public ECardType type;
         public int rankUp;
         public int rankRight;
