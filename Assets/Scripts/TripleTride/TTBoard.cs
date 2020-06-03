@@ -1,38 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace Ahyeong.TripleTride
+﻿namespace Ahyeong.TripleTride
 {
     public class TTBoard
     {
-        public TTCard[,] slots;
-        public int Width => slots.GetUpperBound(1) + 1;
-        public int Height => slots.GetUpperBound(0) + 1;
-        public int SlotCount => slots.Length;
+        private TTCard[,] _slots;
+        public int Width => _slots.GetUpperBound(1) + 1;
+        public int Height => _slots.GetUpperBound(0) + 1;
+        public int SlotCount => _slots.Length;
 
         private TTRuleContext _ruleContext = new TTRuleContext();
 
-        public TTBoard(int boardWidth, int boardHeight, TTRuleContext ruleContext)
+        public TTBoard( int boardHeight, int boardWidth, TTRuleContext ruleContext)
         {
-            slots = new TTCard[boardHeight, boardWidth];
+            _slots = new TTCard[boardHeight, boardWidth];
             _ruleContext = ruleContext;
         }
 
-        public void PutCard(TTCard card, int i, int j)
+        public void PutCard(TTCard card, int index_i, int index_j)
         {
-            if(IsCardExistAt(i, j))
+            if (IsCardExistAt(index_i, index_j))
             {
                 return;
             }
 
-            slots[i, j] = card;
-            _ruleContext.ApplyRuleOnMove(this, card.ownPlayer, i, j);
-        }
-
-        public void OnTypeAdded()
-        {
-
+            _slots[index_i, index_j] = card;
+            _ruleContext.ApplyRuleOnMove(this, card.belongPlayerId, index_i, index_j);
         }
 
         public bool IsBoardFull()
@@ -41,7 +32,7 @@ namespace Ahyeong.TripleTride
             {
                 for(int j = 0; j < Width; j++)
                 {
-                    if(!IsCardExistAt(i, j))
+                    if (!IsCardExistAt(i, j))
                     {
                         return false;
                     }
@@ -52,14 +43,14 @@ namespace Ahyeong.TripleTride
 
         public bool IsCardExistAt(int i, int j)
         {
-            return slots[i, j] != null;
+            return _slots[i, j] != null;
         }
 
         public TTCard GetCardAt(int index_i, int index_j)
         {
             if (IsPositionValid(index_i, index_j))
             {
-                return slots[index_i, index_j];
+                return _slots[index_i, index_j];
             }
             return null;
         }
@@ -87,7 +78,7 @@ namespace Ahyeong.TripleTride
             return GetCardAt(index_i, index_j);
         }
 
-        public bool IsPositionValid(int index_i, int index_j)
+        private bool IsPositionValid(int index_i, int index_j)
         {
             return (index_i >= 0) && (index_i < Height) && (index_j >= 0) && (index_j < Width);
         }

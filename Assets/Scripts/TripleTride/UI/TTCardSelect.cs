@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Ahyeong.TripleTride.UI
 {
     [RequireComponent(typeof(TTCardUI))]
     public class TTCardSelect : MonoBehaviour
     {
-        private TTCardUI _cardUI;
+        private TTCardUI _cardUI = null;
 
         private void Awake()
         {

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,15 +6,16 @@ namespace Ahyeong.TripleTride.UI
 {
     public class TTScoreUI : MonoBehaviour
     {
-        public Image scoreIconPrefab;
-        public Transform scoreParent;
+        [SerializeField] private Image _scoreIconPrefab = null;
+        [SerializeField] private Transform _scoreParent = null;
+
         private List<Image> _scoreIcons = new List<Image>();
 
         public void InitializeUI(int totalCardCount)
         {
             for(int i = 0; i < totalCardCount; i++)
             {
-                Image icon = Instantiate(scoreIconPrefab, scoreParent);
+                Image icon = Instantiate(_scoreIconPrefab, _scoreParent);
                 _scoreIcons.Add(icon);
             }
         }

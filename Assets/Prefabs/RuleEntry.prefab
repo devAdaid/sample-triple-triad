@@ -131,8 +131,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feccbff0042817f4f93a7782e23aa2e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameText: {fileID: 4172761841903232148}
-  descriptionText: {fileID: 4172761840070850014}
+  _nameText: {fileID: 4172761841903232148}
+  _descriptionText: {fileID: 4172761840070850014}
   isSelected: 0
 --- !u!222 &4172761840308955340
 CanvasRenderer:

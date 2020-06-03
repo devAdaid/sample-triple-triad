@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Ahyeong.TripleTride
 {
@@ -25,13 +23,13 @@ namespace Ahyeong.TripleTride
 
         public TTCardData cardData = null;
         public int rankDifference = 0;
-        public int ownPlayer = 0;
+        public int belongPlayerId = 0;
 
-        public TTCard(TTCardData data, int player)
+        public TTCard(TTCardData data, int playerId)
         {
             cardData = data;
             rankDifference = 0;
-            ownPlayer = player;
+            belongPlayerId = playerId;
         }
 
         public int GetRankOf(EDirection direction)

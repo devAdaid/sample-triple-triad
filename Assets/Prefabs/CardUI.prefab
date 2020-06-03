@@ -203,16 +203,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48629f1fb94476842a883415b60c2db8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardChild: {fileID: 5832271903739701972}
+  _cardParent: {fileID: 5832271903739701972}
+  _rankUpText: {fileID: 4378037127517655217}
+  _rankRightText: {fileID: 4378037127098809416}
+  _rankDownText: {fileID: 4378037128025622886}
+  _rankLeftText: {fileID: 4378037126896607099}
+  backgroundImg: {fileID: 7952736265364656963}
   card:
     cardData: {fileID: 0}
     rankDifference: 0
-    ownPlayer: 0
-  rankUpText: {fileID: 4378037127517655217}
-  rankRightText: {fileID: 4378037127098809416}
-  rankDownText: {fileID: 4378037128025622886}
-  rankLeftText: {fileID: 4378037126896607099}
-  backgroundImg: {fileID: 7952736265364656963}
+    belongPlayerId: 0
 --- !u!1 &4378037127517655223
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,7 +379,7 @@ GameObject:
   - component: {fileID: 7562971017960908306}
   - component: {fileID: 7952736265364656963}
   m_Layer: 5
-  m_Name: Child
+  m_Name: CardParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -429,8 +429,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_Color: {r: 0.8679245, g: 0.38892844, b: 0.38892844, a: 1}
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []

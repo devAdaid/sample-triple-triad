@@ -1,6 +1,5 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -9,8 +8,8 @@ namespace Ahyeong.TripleTride.UI
 {
     public class TTResultUI : MonoBehaviour
     {
-        public Text resultText;
-        public Image backgroundImg;
+        [SerializeField] private Text _resultText = null;
+        [SerializeField] private Image _backgroundImg = null;
 
         public void UpdateUI(List<int> winPlayers)
         {
@@ -19,14 +18,16 @@ namespace Ahyeong.TripleTride.UI
             if(winPlayers.Count == 1)
             {
                 int winPlayer = winPlayers[0];
-                resultText.text = $"플레이어 {winPlayer + 1} 승리!";
-                backgroundImg.color = TTGameView.Instance.GetUIColorOf(winPlayer);
+                _resultText.text = $"플레이어 {winPlayer + 1} 승리!";
+
+                _backgroundImg.color = TTGameView.Instance.GetUIColorOf(winPlayer);
             }
             else
             {
-                resultText.text = $"무승부";
+                _resultText.text = "무승부";
+
                 List<Color> winPlayerColors = winPlayers.Select(player => TTGameView.Instance.GetUIColorOf(player)).ToList();
-                backgroundImg.color = MixColors(winPlayerColors);
+                _backgroundImg.color = MixColors(winPlayerColors);
             }
         }
 

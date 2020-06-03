@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5786056447082076658}
   - component: {fileID: 5331234718551736907}
   m_Layer: 5
-  m_Name: Child
+  m_Name: CardParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -486,16 +486,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48629f1fb94476842a883415b60c2db8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardChild: {fileID: 5451780371696577417}
+  _cardParent: {fileID: 5451780371696577417}
+  _rankUpText: {fileID: 6081899297143415836}
+  _rankRightText: {fileID: 6081899295382243557}
+  _rankDownText: {fileID: 6081899296636501451}
+  _rankLeftText: {fileID: 6081899295448230870}
+  backgroundImg: {fileID: 5786056447082076658}
   card:
     cardData: {fileID: 0}
     rankDifference: 0
-    ownPlayer: 0
-  rankUpText: {fileID: 6081899297143415836}
-  rankRightText: {fileID: 6081899295382243557}
-  rankDownText: {fileID: 6081899296636501451}
-  rankLeftText: {fileID: 6081899295448230870}
-  backgroundImg: {fileID: 5786056447082076658}
+    belongPlayerId: 0
 --- !u!114 &6081899297166978222
 MonoBehaviour:
   m_ObjectHideFlags: 0

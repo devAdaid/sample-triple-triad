@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace Ahyeong.TripleTride
+﻿namespace Ahyeong.TripleTride
 {
     public class TTRuleContext
     {
@@ -11,19 +7,21 @@ namespace Ahyeong.TripleTride
         public System.Comparison<int> rankComaparison = TTRule.Compare;
         public Compared afterCompareCallback;
 
-        public void ApplyRuleOnMove(TTBoard board, int movedPlayerNumber, int i, int j)
+        public void ApplyRuleOnMove(TTBoard board, int movedPlayerId, int index_i, int index_j)
         {
-            TTCard movedCard = board.slots[i, j];
+            TTCard movedCard = board.GetCardAt(index_i, index_j);
 
             foreach (EDirection direction in System.Enum.GetValues(typeof(EDirection)))
             {
-                TTCard adjacentCard = board.GetCardAt(i, j, direction);
-                if (adjacentCard != null && adjacentCard.ownPlayer != movedPlayerNumber)
+                TTCard adjacentCard = board.GetCardAt(index_i, index_j, direction);
+                if (adjacentCard != null && (adjacentCard.belongPlayerId != movedPlayerId) )
                 {
-                    bool canTurnCard = CompareRank(movedCard.GetRankOf(direction), adjacentCard.GetOppositeRankOf(direction)) > 0;
+                    int movedCardRank = movedCard.GetRankOf(direction);
+                    int adjacentCardRank = adjacentCard.GetOppositeRankOf(direction);
+                    bool canTurnCard = CompareRank(movedCardRank, adjacentCardRank) > 0;
                     if(canTurnCard)
                     {
-                        adjacentCard.ownPlayer = movedPlayerNumber;
+                        adjacentCard.belongPlayerId = movedPlayerId;
                     }
                 }
             }
@@ -43,11 +41,6 @@ namespace Ahyeong.TripleTride
         {
             rankComaparison = TTRule.Compare;
             afterCompareCallback = null;
-        }
-
-        public void ApplyRule(TTRule rule)
-        {
-            rule.ApplyRuleAt(this);
         }
     }
 }

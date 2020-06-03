@@ -1,14 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace Ahyeong.TripleTride.UI
 {
     public class TTSelectRuleUI : MonoBehaviour
     {
-        public TTRuleEntry ruleEntryPrefab;
-        public Transform entryParent;
+        [SerializeField] private TTRuleEntry _ruleEntryPrefab = null;
+        [SerializeField] private Transform _entryParent = null;
+
         private List<TTRuleEntry> _ruleEntries = new List<TTRuleEntry>();
 
         public void InitializeUI()
@@ -17,7 +17,7 @@ namespace Ahyeong.TripleTride.UI
 
             TTRule[] rules =  { new TTReverseRule(), new TTFallenAceRule()};
 
-            var entries = entryParent.GetComponentsInChildren<TTRuleEntry>();
+            var entries = _entryParent.GetComponentsInChildren<TTRuleEntry>();
             for(int i = 0; i < rules.Length; i++)
             {
                 TTRuleEntry entry = null;
@@ -27,7 +27,7 @@ namespace Ahyeong.TripleTride.UI
                 }
                 else
                 {
-                    entry = Instantiate(ruleEntryPrefab, entryParent);
+                    entry = Instantiate(_ruleEntryPrefab, _entryParent);
                 }
 
                 entry.SetWithRule(rules[i]);
@@ -43,7 +43,7 @@ namespace Ahyeong.TripleTride.UI
 
         private void MakeRuleEntry(TTRule rule)
         {
-            TTRuleEntry newEntry = Instantiate(ruleEntryPrefab, entryParent);
+            TTRuleEntry newEntry = Instantiate(_ruleEntryPrefab, _entryParent);
             newEntry.SetWithRule(rule);
             _ruleEntries.Add(newEntry);
         }

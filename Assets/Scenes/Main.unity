@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 57751062}
   - component: {fileID: 57751061}
   m_Layer: 5
-  m_Name: MoveBlocker
+  m_Name: InputBlocker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 74549437}
   - component: {fileID: 74549436}
   m_Layer: 5
-  m_Name: MoveBlocker
+  m_Name: InputBlocker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -709,7 +709,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.5764706, g: 0.44313726, b: 0.6039216, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -784,13 +784,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2668a1a84f85fc64caced71789ae4b64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  presenter: {fileID: 1725150218}
-  boardSize: 3
-  playerCount: 2
+  _presenter: {fileID: 1599143289}
+  _boardSize: 3
+  _playerCount: 2
   players: []
-  currentPlayerIndex: 0
-  gameState: 0
-  usedCards: []
+  currentPlayerId: 0
 --- !u!4 &530205118
 Transform:
   m_ObjectHideFlags: 0
@@ -803,7 +801,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &643410361
 GameObject:
@@ -1094,12 +1092,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 728ce1129e2906a4583b691fc35b80cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCardUIPrefab: {fileID: 6081899297166978213, guid: 371a58e6c913cf64c90064898aebfb2e,
-    type: 3}
-  cardParent: {fileID: 233356817}
-  moveBlocker: {fileID: 57751059}
   cardColor: {r: 0.43805626, g: 0.5109153, b: 0.8679245, a: 1}
   uiColor: {r: 0.76862746, g: 0.80784315, b: 1, a: 1}
+  _playerCardUIPrefab: {fileID: 6081899297166978213, guid: 371a58e6c913cf64c90064898aebfb2e,
+    type: 3}
+  _cardParent: {fileID: 233356817}
+  _inputBlocker: {fileID: 57751059}
 --- !u!1 &737111275
 GameObject:
   m_ObjectHideFlags: 0
@@ -1373,7 +1371,7 @@ GameObject:
   - component: {fileID: 813145855}
   - component: {fileID: 813145854}
   m_Layer: 5
-  m_Name: Text
+  m_Name: ResultText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1600,12 +1598,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 728ce1129e2906a4583b691fc35b80cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCardUIPrefab: {fileID: 6081899297166978213, guid: 371a58e6c913cf64c90064898aebfb2e,
-    type: 3}
-  cardParent: {fileID: 737111276}
-  moveBlocker: {fileID: 74549435}
   cardColor: {r: 0.9056604, g: 0.40294212, b: 0.34603062, a: 1}
   uiColor: {r: 1, g: 0.7921569, b: 0.76862746, a: 1}
+  _playerCardUIPrefab: {fileID: 6081899297166978213, guid: 371a58e6c913cf64c90064898aebfb2e,
+    type: 3}
+  _cardParent: {fileID: 737111276}
+  _inputBlocker: {fileID: 74549435}
 --- !u!1 &952628222
 GameObject:
   m_ObjectHideFlags: 0
@@ -1955,9 +1953,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 766b8eeece9cff44cb2a6aeadaafde14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotUIPrefab: {fileID: 7603379637734311747, guid: 7e98ab17ef8b5b340b1da07fae4895fe,
+  _slotUIPrefab: {fileID: 7603379637734311747, guid: 7e98ab17ef8b5b340b1da07fae4895fe,
     type: 3}
-  slotParent: {fileID: 992213349}
+  _slotParent: {fileID: 992213349}
 --- !u!1 &1525411006
 GameObject:
   m_ObjectHideFlags: 0
@@ -2028,6 +2026,117 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
+--- !u!1 &1599143288
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1599143290}
+  - component: {fileID: 1599143289}
+  m_Layer: 0
+  m_Name: TTPresenter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1599143289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1599143288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 293c7ae13b4f7c14f9a07d94f1223b35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameModel: {fileID: 530205117}
+  _onInitialize:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1725150219}
+        m_MethodName: Initialize
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onBoardUpdate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1725150219}
+        m_MethodName: UpdateBoardUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1725150219}
+        m_MethodName: UpdateScoreUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onPlayerUpdate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1725150219}
+        m_MethodName: UpdatePlayerUI
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onResultUpdate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1725150219}
+        m_MethodName: UpdateResultUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!4 &1599143290
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1599143288}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1725150213
 GameObject:
   m_ObjectHideFlags: 0
@@ -2038,12 +2147,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1725150217}
   - component: {fileID: 1725150219}
-  - component: {fileID: 1725150218}
   - component: {fileID: 1725150216}
   - component: {fileID: 1725150215}
   - component: {fileID: 1725150214}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2133,86 +2241,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1725150218
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1725150213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 293c7ae13b4f7c14f9a07d94f1223b35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameModel: {fileID: 530205117}
-  onInitialize:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1725150219}
-        m_MethodName: Initialize
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onBoardUpdate:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1725150219}
-        m_MethodName: UpdateBoardUI
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1725150219}
-        m_MethodName: UpdateScoreUI
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onPlayerUpdate:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1725150219}
-        m_MethodName: UpdatePlayerUI
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onResultUpdate:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1725150219}
-        m_MethodName: UpdateResultUI
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1725150219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2225,18 +2253,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e38c0fb73852e74282db3a41aa9cc94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  presenter: {fileID: 1725150218}
-  selectRuleUI: {fileID: 2104508378}
-  resultUI: {fileID: 2106588108}
-  scoreUI: {fileID: 1850020505}
-  boardUI: {fileID: 1393358590}
-  playerUI:
+  _presenter: {fileID: 1599143289}
+  _selectRuleUI: {fileID: 2104508378}
+  _scoreUI: {fileID: 1850020505}
+  _boardUI: {fileID: 1393358590}
+  _playerUI:
   - {fileID: 704736018}
   - {fileID: 949364792}
-  selectedCard:
-    cardData: {fileID: 0}
-    rankDifference: 0
-    ownPlayer: 0
+  _resultUI: {fileID: 2106588108}
 --- !u!1 &1850020501
 GameObject:
   m_ObjectHideFlags: 0
@@ -2324,9 +2348,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fc3be187594b084f9af15a756f7ea32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreIconPrefab: {fileID: 7960481971286052002, guid: 41046a1c463ccfd4c89e28d1746b75d6,
+  _scoreIconPrefab: {fileID: 7960481971286052002, guid: 41046a1c463ccfd4c89e28d1746b75d6,
     type: 3}
-  scoreParent: {fileID: 1850020502}
+  _scoreParent: {fileID: 1850020502}
 --- !u!1001 &2023736750
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2652,9 +2676,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63bf51458d370af4f930dccc91d5cd29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ruleEntryPrefab: {fileID: 4172761840308955379, guid: 0c501dbd5d791d6469bb909be44f8215,
+  _ruleEntryPrefab: {fileID: 4172761840308955379, guid: 0c501dbd5d791d6469bb909be44f8215,
     type: 3}
-  entryParent: {fileID: 2023853278}
+  _entryParent: {fileID: 1525411007}
 --- !u!1 &2106588104
 GameObject:
   m_ObjectHideFlags: 0
@@ -2741,8 +2765,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5630bab769336bd499e54b9ab095d574, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resultText: {fileID: 813145854}
-  backgroundImg: {fileID: 924694725}
+  _resultText: {fileID: 813145854}
+  _backgroundImg: {fileID: 924694725}
 --- !u!1 &2130132953
 GameObject:
   m_ObjectHideFlags: 0
