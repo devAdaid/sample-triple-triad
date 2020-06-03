@@ -7,15 +7,21 @@ namespace Ahyeong.TripleTride.UI
     public class TTGameView : MonoSingleton<TTGameView>
     {
         public TTGamePresenter presenter;
+        public TTSelectRuleUI selectRuleUI;
         public TTBoardUI boardUI;
         public List<TTPlayerUI> playerUI;
 
         #region Initialize UI
         public void Initialize()
         {
-            Debug.Log("Init");
+            InitializeSelectRuleUI();
             InitializeBoardUI();
             InitializePlayerUI();
+        }
+
+        public void InitializeSelectRuleUI()
+        {
+            selectRuleUI.InitializeUI();
         }
 
         public void InitializeBoardUI()
@@ -56,8 +62,6 @@ namespace Ahyeong.TripleTride.UI
 
         public void SelectSlot(int slot_i, int slot_j)
         {
-            // 카드 선택중이고 슬롯에 카드가 놓여있는지
-            // 그렇다면 카드 놓고 턴처리
             if(selectedCard != null)
             {
                 if (!presenter.IsCardExistAt(slot_i, slot_j))
@@ -76,8 +80,14 @@ namespace Ahyeong.TripleTride.UI
             }
             else
             {
-                Debug.Log("Not player's turn");
+                Debug.LogWarning("Not player's turn");
             }
+        }
+
+        public void SelectRules(List<TTRule> rules)
+        {
+            presenter.ApplyRules(rules);
+            presenter.ChangeGameState(EGameState.Playing);
         }
         #endregion
     }

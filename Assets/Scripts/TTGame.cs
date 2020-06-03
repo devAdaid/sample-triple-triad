@@ -15,6 +15,7 @@ namespace Ahyeong.TripleTride
     {
         public TTGamePresenter presenter;
         public int boardSize = 3;
+        public int playerCount = 2;
         public TTBoard board;
         public List<TTPlayer> players = new List<TTPlayer>();
         public int MaxPlayerCount => players.Count;
@@ -22,13 +23,18 @@ namespace Ahyeong.TripleTride
         private List<TTRule> _rules = new List<TTRule>();
         private TTRuleContext _ruleContext = new TTRuleContext();
         public EGameState gameState = EGameState.Ready;
+        public List<TTCard> usedCards = new List<TTCard>();
 
         void Awake()
         {
             board = new TTBoard(boardSize, boardSize, _ruleContext);
-            int deckCard = (board.slots.Length + 1) / 2;
-            players.Add(new TTPlayer(0, TTCardDatabase.Instance.GetRandomCardData(deckCard), "플레이어1"));
-            players.Add(new TTPlayer(1, TTCardDatabase.Instance.GetRandomCardData(deckCard), "플레이어2"));
+            int deckCard = (board.slots.Length + 1) / playerCount;
+            for(int i = 0; i < playerCount; i++)
+            {
+                TTPlayer newPlayer = new TTPlayer(i, TTCardDatabase.Instance.GetRandomCardData(deckCard), $"플레이어{i + 1}");
+                players.Add(newPlayer);
+                usedCards.AddRange(newPlayer.playerHand);
+            }
             presenter.Initialize();
             UpdateUI();
         }
@@ -42,7 +48,18 @@ namespace Ahyeong.TripleTride
         {
             board.PutCard(card, i, j);
             players[card.ownPlayer].RemoveCard(card);
-            NextTurn();
+
+            if(board.IsBoardFull())
+            {
+                EndGame();
+                var list = GetPlayersHoldingMaxCard();
+                Debug.Log(list.Count);
+            }
+            else
+            {
+                NextTurn();
+            }
+
             UpdateUI();
         }
 
@@ -72,7 +89,7 @@ namespace Ahyeong.TripleTride
             return -1;
         }
 
-        public void SetRules(List<TTRule> rules)
+        public void ApplyRules(List<TTRule> rules)
         {
             _rules = rules;
             _ruleContext.ResetRules();
@@ -84,8 +101,43 @@ namespace Ahyeong.TripleTride
 
         public bool CanPlayerMove(int playerNumber)
         {
+            return gameState == EGameState.Playing && currentPlayerIndex == playerNumber;
+        }
 
-            return true;
+        private void EndGame()
+        {
+            gameState = EGameState.End;
+            // presenter.onStateUpdate
+        }
+
+        public void ChangeState(EGameState state)
+        {
+            gameState = state;
+            UpdateUI();
+        }
+
+        private List<int> GetPlayersHoldingMaxCard()
+        {
+            int[] cardCounts = new int[playerCount];
+            int maxHoldingCardCount = 0;
+            foreach(TTCard card in usedCards)
+            {
+                cardCounts[card.ownPlayer] += 1;
+                if(cardCounts[card.ownPlayer] > maxHoldingCardCount)
+                {
+                    maxHoldingCardCount = cardCounts[card.ownPlayer];
+                }
+            }
+
+            List<int> playersHoldingMaxCard = new List<int>();
+            for(int player = 0; player < playerCount; player++)
+            {
+                if(cardCounts[player] == maxHoldingCardCount)
+                {
+                    playersHoldingMaxCard.Add(player);
+                }
+            }
+            return playersHoldingMaxCard;
         }
 
         private void UpdateUI()

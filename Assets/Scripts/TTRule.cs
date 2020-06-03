@@ -6,6 +6,8 @@ namespace Ahyeong.TripleTride
 {
     public abstract class TTRule
     {
+        public virtual string Name => string.Empty;
+        public virtual string Description => string.Empty;
         public bool canApplyCondition;
         public const int ACE = 10;
 
@@ -38,6 +40,9 @@ namespace Ahyeong.TripleTride
     // 역전: 
     public class TTReverseRule : TTRule
     {
+        public override string Name => "역전";
+        public override string Description => "";
+
         public override void ApplyRuleAt(TTRuleContext ruleContext)
         {
             ruleContext.afterCompareCallback += (ref int result) => { return -result; };
@@ -47,6 +52,9 @@ namespace Ahyeong.TripleTride
     // 에이스 약화
     public class TTFallenAceRule : TTRule
     {
+        public override string Name => "에이스 약화";
+        public override string Description => "";
+
         public override void ApplyRuleAt(TTRuleContext ruleContext)
         {
             ruleContext.rankComaparison = CompareAceFalling;

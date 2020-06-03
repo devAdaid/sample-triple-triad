@@ -50,7 +50,7 @@ namespace Ahyeong.TripleTride
 
         public bool GetPlayerMoveState(int playerNumber)
         {
-            return gameModel.currentPlayerIndex == gameModel.players[playerNumber].playerNumber;
+            return gameModel.CanPlayerMove(playerNumber);
         }
 
         public bool IsCardExistAt(int board_i, int board_j)
@@ -61,14 +61,19 @@ namespace Ahyeong.TripleTride
         #endregion
 
         #region Update Model
-        public void ChangeGameState(EGameState gameState)
+        public void ChangeGameState(EGameState state)
         {
-            
+            gameModel.ChangeState(state);
         }
 
         public void PutCard(TTCard card, int i, int j)
         {
             gameModel.PutCardOnBoard(card, i, j);
+        }
+
+        public void ApplyRules(List<TTRule> rules)
+        {
+            gameModel.ApplyRules(rules);
         }
         #endregion
     }
