@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Ahyeong.TripleTride.UI
 {
-    public class TTGameView : MonoBehaviour
+    public class TTGameView : MonoSingleton<TTGameView>
     {
         public TTGamePresenter presenter;
         public TTBoardUI boardUI;

@@ -25,8 +25,7 @@ namespace Ahyeong.TripleTride.UI
 
         public void OnSelectSlot()
         {
-            TTGameView view = FindObjectOfType<TTGameView>();
-            view.SelectSlot(_slot_i, _slot_j);
+            TTGameView.Instance.SelectSlot(_slot_i, _slot_j);
         }
     }
 }

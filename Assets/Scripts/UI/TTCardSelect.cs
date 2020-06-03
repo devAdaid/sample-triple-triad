@@ -16,8 +16,7 @@ namespace Ahyeong.TripleTride.UI
 
         public void OnSelectCard()
         {
-            TTGameView view = FindObjectOfType<TTGameView>();
-            view.SelectCard(_cardUI.card);
+            TTGameView.Instance.SelectCard(_cardUI.card);
         }
     }
 }
