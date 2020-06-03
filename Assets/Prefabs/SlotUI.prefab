@@ -53,6 +53,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardUI: {fileID: 5724725953646665734}
+  _slot_i: 0
+  _slot_j: 0
 --- !u!222 &7178770508681193937
 CanvasRenderer:
   m_ObjectHideFlags: 0

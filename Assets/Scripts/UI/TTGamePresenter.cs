@@ -30,6 +30,12 @@ namespace Ahyeong.TripleTride
         {
             onPlayerUpdate.Invoke(playerNumber);
         }
+
+        public UnityEvent onResultUpdate;
+        public void UpdateResult()
+        {
+            onResultUpdate.Invoke();
+        }
         #endregion
 
         #region Retrieve data
@@ -41,6 +47,21 @@ namespace Ahyeong.TripleTride
         public TTPlayer GetPlayer(int number)
         {
             return gameModel.players[number];
+        }
+
+        public int GetTotalCardCount()
+        {
+            return gameModel.TotalCardCount;
+        }
+
+        public int[] GetPlayerScores()
+        {
+            return gameModel.GetPlayerScores();
+        }
+
+        public List<int> GetWinPlayers()
+        {
+            return gameModel.GetPlayersHoldingMaxCard();
         }
 
         public int GetCurrentPlayer()

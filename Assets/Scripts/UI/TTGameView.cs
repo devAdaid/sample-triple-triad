@@ -8,6 +8,8 @@ namespace Ahyeong.TripleTride.UI
     {
         public TTGamePresenter presenter;
         public TTSelectRuleUI selectRuleUI;
+        public TTResultUI resultUI;
+        public TTScoreUI scoreUI;
         public TTBoardUI boardUI;
         public List<TTPlayerUI> playerUI;
 
@@ -15,6 +17,7 @@ namespace Ahyeong.TripleTride.UI
         public void Initialize()
         {
             InitializeSelectRuleUI();
+            InitializeScoreUI();
             InitializeBoardUI();
             InitializePlayerUI();
         }
@@ -22,6 +25,11 @@ namespace Ahyeong.TripleTride.UI
         public void InitializeSelectRuleUI()
         {
             selectRuleUI.InitializeUI();
+        }
+
+        public void InitializeScoreUI()
+        {
+            scoreUI.InitializeUI(presenter.GetTotalCardCount());
         }
 
         public void InitializeBoardUI()
@@ -40,6 +48,12 @@ namespace Ahyeong.TripleTride.UI
         #endregion
 
         #region Update UI
+        public void UpdateScoreUI()
+        {
+            var score = presenter.GetPlayerScores();
+            scoreUI.UpdateUI(score);
+        }
+
         public void UpdateBoardUI()
         {
             var board = presenter.GetBoard();
@@ -51,9 +65,10 @@ namespace Ahyeong.TripleTride.UI
             playerUI[playerNumber].UpdateUI(presenter.GetPlayer(playerNumber), presenter.GetPlayerMoveState(playerNumber));
         }
 
-        public void UpdateGameStateUI()
+        public void UpdateResultUI()
         {
-
+            var winPlayers = presenter.GetWinPlayers();
+            resultUI.UpdateUI(winPlayers);
         }
         #endregion
 
@@ -90,5 +105,27 @@ namespace Ahyeong.TripleTride.UI
             presenter.ChangeGameState(EGameState.Playing);
         }
         #endregion
+
+        public Color GetCardColorOf(int playerNumber)
+        {
+            if(playerNumber < playerUI.Count)
+            {
+                return playerUI[playerNumber].cardColor;
+            }
+
+            Debug.LogWarning($"Player {playerNumber} not exist");
+            return Color.black;
+        }
+
+        public Color GetUIColorOf(int playerNumber)
+        {
+            if (playerNumber < playerUI.Count)
+            {
+                return playerUI[playerNumber].uiColor;
+            }
+
+            Debug.LogWarning($"Player {playerNumber} not exist");
+            return Color.black;
+        }
     }
 }

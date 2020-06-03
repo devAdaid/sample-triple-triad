@@ -10,6 +10,8 @@ namespace Ahyeong.TripleTride.UI
         public TTCardUI playerCardUIPrefab;
         public Transform cardParent;
         public GameObject moveBlocker;
+        public Color cardColor = Color.white;
+        public Color uiColor = Color.white;
         private TTCardUI[] cardUIs;
 
         public void InitializeUI(TTPlayer player)

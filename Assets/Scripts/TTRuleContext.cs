@@ -20,8 +20,6 @@ namespace Ahyeong.TripleTride
                 TTCard adjacentCard = board.GetCardAt(i, j, direction);
                 if (adjacentCard != null && adjacentCard.ownPlayer != movedPlayerNumber)
                 {
-                    Debug.Log($"Compare with {direction} card");
-                    Debug.Log($"Compare: {movedCard.GetRankOf(direction)}, {adjacentCard.GetOppositeRankOf(direction)}");
                     bool canTurnCard = CompareRank(movedCard.GetRankOf(direction), adjacentCard.GetOppositeRankOf(direction)) > 0;
                     if(canTurnCard)
                     {
@@ -38,7 +36,6 @@ namespace Ahyeong.TripleTride
             {
                 result = afterCompareCallback(ref result);
             }
-            Debug.Log($"Compare result: {result}");
             return result;
         }
 

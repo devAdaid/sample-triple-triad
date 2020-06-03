@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Ahyeong.TripleTride
+namespace Ahyeong.TripleTride.UI
 {
     public class TTCardUI : MonoBehaviour
     {
@@ -27,7 +27,7 @@ namespace Ahyeong.TripleTride
                 rankRightText.text = GetRankString(cardData.rankRight);
                 rankDownText.text = GetRankString(cardData.rankDown);
                 rankLeftText.text = GetRankString(cardData.rankLeft);
-                backgroundImg.color = card.ownPlayer == 0 ? Color.blue : Color.red;
+                backgroundImg.color = TTGameView.Instance.GetCardColorOf(card.ownPlayer);
             }
             else
             {

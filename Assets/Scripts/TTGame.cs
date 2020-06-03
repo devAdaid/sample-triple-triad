@@ -19,6 +19,7 @@ namespace Ahyeong.TripleTride
         public TTBoard board;
         public List<TTPlayer> players = new List<TTPlayer>();
         public int MaxPlayerCount => players.Count;
+        public int TotalCardCount => usedCards.Count;
         public int currentPlayerIndex = 0;
         private List<TTRule> _rules = new List<TTRule>();
         private TTRuleContext _ruleContext = new TTRuleContext();
@@ -51,9 +52,8 @@ namespace Ahyeong.TripleTride
 
             if(board.IsBoardFull())
             {
-                EndGame();
-                var list = GetPlayersHoldingMaxCard();
-                Debug.Log(list.Count);
+                ChangeState(EGameState.End);
+                presenter.UpdateResult();
             }
             else
             {
@@ -104,19 +104,23 @@ namespace Ahyeong.TripleTride
             return gameState == EGameState.Playing && currentPlayerIndex == playerNumber;
         }
 
-        private void EndGame()
-        {
-            gameState = EGameState.End;
-            // presenter.onStateUpdate
-        }
-
         public void ChangeState(EGameState state)
         {
             gameState = state;
             UpdateUI();
         }
 
-        private List<int> GetPlayersHoldingMaxCard()
+        public int[] GetPlayerScores()
+        {
+            int[] cardCounts = new int[playerCount];
+            foreach (TTCard card in usedCards)
+            {
+                cardCounts[card.ownPlayer] += 1;
+            }
+            return cardCounts;
+        }
+
+        public List<int> GetPlayersHoldingMaxCard()
         {
             int[] cardCounts = new int[playerCount];
             int maxHoldingCardCount = 0;
