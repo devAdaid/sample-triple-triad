@@ -35,9 +35,9 @@ namespace Ahyeong.TripleTride
         }
 
         [SerializeField] private IntEvent _onPlayerUpdate = null;
-        public void UpdatePlayer(int playerNumber)
+        public void UpdatePlayer(int playerId)
         {
-            _onPlayerUpdate.Invoke(playerNumber);
+            _onPlayerUpdate.Invoke(playerId);
         }
 
         [SerializeField] private UnityEvent _onResultUpdate = null;
@@ -48,7 +48,7 @@ namespace Ahyeong.TripleTride
         #endregion
 
         #region Update Model
-        public void ChangeGameState(EGameState state)
+        public void ChangeGameState(GameState state)
         {
             _gameModel.ChangeState(state);
         }

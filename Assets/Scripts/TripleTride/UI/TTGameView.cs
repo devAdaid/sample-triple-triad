@@ -103,7 +103,7 @@ namespace Ahyeong.TripleTride.UI
         public void SelectRules(List<TTRule> rules)
         {
             _presenter.ApplyRules(rules);
-            _presenter.ChangeGameState(EGameState.Playing);
+            _presenter.ChangeGameState(GameState.Playing);
         }
         #endregion
 

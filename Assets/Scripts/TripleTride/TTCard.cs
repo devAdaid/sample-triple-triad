@@ -2,7 +2,7 @@
 
 namespace Ahyeong.TripleTride
 {
-    public enum EDirection
+    public enum Direction
     {
         Up,
         Right,
@@ -32,33 +32,33 @@ namespace Ahyeong.TripleTride
             belongPlayerId = playerId;
         }
 
-        public int GetRankOf(EDirection direction)
+        public int GetRankOf(Direction direction)
         {
             switch(direction)
             {
-                case EDirection.Up:
+                case Direction.Up:
                     return RankUp;
-                case EDirection.Right:
+                case Direction.Right:
                     return RankRight;
-                case EDirection.Down:
+                case Direction.Down:
                     return RankDown;
-                case EDirection.Left:
+                case Direction.Left:
                     return RankLeft;
             }
             return -1;
         }
 
-        public int GetOppositeRankOf(EDirection direction)
+        public int GetOppositeRankOf(Direction direction)
         {
             switch (direction)
             {
-                case EDirection.Up:
+                case Direction.Up:
                     return RankDown;
-                case EDirection.Right:
+                case Direction.Right:
                     return RankLeft;
-                case EDirection.Down:
+                case Direction.Down:
                     return RankUp;
-                case EDirection.Left:
+                case Direction.Left:
                     return RankRight;
             }
             return -1;

@@ -11,7 +11,7 @@
         {
             TTCard movedCard = board.GetCardAt(index_i, index_j);
 
-            foreach (EDirection direction in System.Enum.GetValues(typeof(EDirection)))
+            foreach (Direction direction in System.Enum.GetValues(typeof(Direction)))
             {
                 TTCard adjacentCard = board.GetCardAt(index_i, index_j, direction);
                 if (adjacentCard != null && (adjacentCard.belongPlayerId != movedPlayerId) )

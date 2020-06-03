@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Ahyeong.TripleTride
 {
-    public enum EGameState
+    public enum GameState
     {
         Ready,
         Playing,
@@ -25,7 +25,7 @@ namespace Ahyeong.TripleTride
 
         private List<TTRule> _rules = new List<TTRule>();
         private TTRuleContext _ruleContext = new TTRuleContext();
-        private EGameState _gameState = EGameState.Ready;
+        private GameState _gameState = GameState.Ready;
         private List<TTCard> _usedCards = new List<TTCard>();
 
         void Awake()
@@ -52,7 +52,7 @@ namespace Ahyeong.TripleTride
 
             if (board.IsBoardFull())
             {
-                ChangeState(EGameState.End);
+                ChangeState(GameState.End);
                 _presenter.UpdateResult();
             }
             else
@@ -96,10 +96,10 @@ namespace Ahyeong.TripleTride
 
         public bool IsPlayerInputActive(int playerId)
         {
-            return (_gameState == EGameState.Playing) && (currentPlayerId == playerId);
+            return (_gameState == GameState.Playing) && (currentPlayerId == playerId);
         }
 
-        public void ChangeState(EGameState state)
+        public void ChangeState(GameState state)
         {
             _gameState = state;
             _presenter.UpdateAllPlayUI();

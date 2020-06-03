@@ -55,21 +55,21 @@
             return null;
         }
 
-        public TTCard GetCardAt(int index_i, int index_j, EDirection direction)
+        public TTCard GetCardAt(int index_i, int index_j, Direction direction)
         {
             #region Apply Direction
             switch (direction)
             {
-                case EDirection.Up:
+                case Direction.Up:
                     index_i -= 1;
                     break;
-                case EDirection.Right:
+                case Direction.Right:
                     index_j += 1;
                     break;
-                case EDirection.Down:
+                case Direction.Down:
                     index_i += 1;
                     break;
-                case EDirection.Left:
+                case Direction.Left:
                     index_j -= 1;
                     break;
             }
