@@ -4,19 +4,33 @@ using UnityEngine;
 
 namespace Ahyeong.TripleTride
 {
+    public enum EGameState
+    {
+        Ready,
+        Playing,
+        End
+    }
+
     public class TTGame : MonoBehaviour
     {
         public TTGamePresenter presenter;
-        public TTBoard board = new TTBoard(3, 3);
+        public int boardSize = 3;
+        public TTBoard board;
         public List<TTPlayer> players = new List<TTPlayer>();
         public int MaxPlayerCount => players.Count;
         public int currentPlayerIndex = 0;
+        private List<TTRule> _rules = new List<TTRule>();
+        private TTRuleContext _ruleContext = new TTRuleContext();
+        public EGameState gameState = EGameState.Ready;
 
         void Awake()
         {
-            players.Add(new TTPlayer(0, TTCardDatabase.Instance.GetRandomCardData(5), "플레이어1"));
-            players.Add(new TTPlayer(1, TTCardDatabase.Instance.GetRandomCardData(5), "플레이어2"));
+            board = new TTBoard(boardSize, boardSize, _ruleContext);
+            int deckCard = (board.slots.Length + 1) / 2;
+            players.Add(new TTPlayer(0, TTCardDatabase.Instance.GetRandomCardData(deckCard), "플레이어1"));
+            players.Add(new TTPlayer(1, TTCardDatabase.Instance.GetRandomCardData(deckCard), "플레이어2"));
             presenter.Initialize();
+            UpdateUI();
         }
 
         public void PutCard()
@@ -26,7 +40,6 @@ namespace Ahyeong.TripleTride
 
         public void PutCardOnBoard(TTCard card, int i, int j)
         {
-            Debug.Log($"Put card at {i}, {j}");
             board.PutCard(card, i, j);
             players[card.ownPlayer].RemoveCard(card);
             NextTurn();
@@ -57,6 +70,22 @@ namespace Ahyeong.TripleTride
 
             Debug.LogError("No players");
             return -1;
+        }
+
+        public void SetRules(List<TTRule> rules)
+        {
+            _rules = rules;
+            _ruleContext.ResetRules();
+            foreach(TTRule rule in _rules)
+            {
+                rule.ApplyRuleAt(_ruleContext);
+            }
+        }
+
+        public bool CanPlayerMove(int playerNumber)
+        {
+
+            return true;
         }
 
         private void UpdateUI()

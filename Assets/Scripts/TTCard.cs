@@ -4,6 +4,14 @@ using UnityEngine;
 
 namespace Ahyeong.TripleTride
 {
+    public enum EDirection
+    {
+        Up,
+        Right,
+        Down,
+        Left
+    }
+
     [System.Serializable]
     public class TTCard
     {
@@ -24,6 +32,38 @@ namespace Ahyeong.TripleTride
             cardData = data;
             rankDifference = 0;
             ownPlayer = player;
+        }
+
+        public int GetRankOf(EDirection direction)
+        {
+            switch(direction)
+            {
+                case EDirection.Up:
+                    return RankUp;
+                case EDirection.Right:
+                    return RankRight;
+                case EDirection.Down:
+                    return RankDown;
+                case EDirection.Left:
+                    return RankLeft;
+            }
+            return -1;
+        }
+
+        public int GetOppositeRankOf(EDirection direction)
+        {
+            switch (direction)
+            {
+                case EDirection.Up:
+                    return RankDown;
+                case EDirection.Right:
+                    return RankLeft;
+                case EDirection.Down:
+                    return RankUp;
+                case EDirection.Left:
+                    return RankRight;
+            }
+            return -1;
         }
     }
 }

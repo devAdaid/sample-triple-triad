@@ -42,7 +42,7 @@ namespace Ahyeong.TripleTride.UI
 
         public void UpdatePlayerUI(int playerNumber)
         {
-            playerUI[playerNumber].UpdateUI(presenter.GetPlayer(playerNumber));
+            playerUI[playerNumber].UpdateUI(presenter.GetPlayer(playerNumber), presenter.GetPlayerMoveState(playerNumber));
         }
 
         public void UpdateGameStateUI()

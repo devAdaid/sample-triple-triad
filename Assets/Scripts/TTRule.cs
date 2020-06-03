@@ -32,68 +32,7 @@ namespace Ahyeong.TripleTride
             return result;
         }
     }
-
-    #region Card Reveal Rules
-
-    // 모두 공개
-    public class TTAllOpenRule : TTRule
-    {
-        public override void ApplyRuleAt(TTRuleContext ruleContext)
-        {
-
-        }
-    }
-
-    // 3장 공개
-    public class TTThreeOpenRule : TTRule
-    {
-        public override void ApplyRuleAt(TTRuleContext ruleContext)
-        {
-
-        }
-    }
-
-    #endregion
-
-    #region Card Selection Rules
-
-    // 무작위 패
-    public class TTRandomRule : TTRule
-    {
-        public override void ApplyRuleAt(TTRuleContext ruleContext)
-        {
-
-        }
-    }
-
-    // 순서대로
-    public class TTOrderRule : TTRule
-    {
-        public override void ApplyRuleAt(TTRuleContext ruleContext)
-        {
-
-        }
-    }
-
-    // 무작위 순서
-    public class TTChaosRule : TTRule
-    {
-        public override void ApplyRuleAt(TTRuleContext ruleContext)
-        {
-
-        }
-    }
-
-    // 카드 교환
-    public class TTSwapRule : TTRule
-    {
-        public override void ApplyRuleAt(TTRuleContext ruleContext)
-        {
-
-        }
-    }
-    #endregion
-
+    
     #region Card Condition Rules
     
     // 역전: 
@@ -101,7 +40,7 @@ namespace Ahyeong.TripleTride
     {
         public override void ApplyRuleAt(TTRuleContext ruleContext)
         {
-            ruleContext.reverseRankComparison = true;
+            ruleContext.afterCompareCallback += (ref int result) => { return -result; };
         }
     }
 
@@ -110,28 +49,10 @@ namespace Ahyeong.TripleTride
     {
         public override void ApplyRuleAt(TTRuleContext ruleContext)
         {
-            ruleContext.rankComapareFunction = CompareAceFalling;
+            ruleContext.rankComaparison = CompareAceFalling;
         }
     }
-
-    // 동수
-    public class TTSameRule : TTRule
-    {
-        public override void ApplyRuleAt(TTRuleContext ruleContext)
-        {
-
-        }
-    }
-
-    // 합산
-    public class TTPlusRule : TTRule
-    {
-        public override void ApplyRuleAt(TTRuleContext ruleContext)
-        {
-
-        }
-    }
-
+    
     // 유형 강화
     public class TTAscensionRule : TTRule
     {

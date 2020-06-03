@@ -33,7 +33,6 @@ namespace Ahyeong.TripleTride
         {
             int removeIndex = playerHand.IndexOf(card);
             playerHand[removeIndex] = null;
-            Debug.Log($"Remove card at {removeIndex}");
         }
 
         public void SetDeck(List<TTCardData> newDeck)

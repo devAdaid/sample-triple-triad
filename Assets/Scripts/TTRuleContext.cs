@@ -4,29 +4,48 @@ using UnityEngine;
 
 namespace Ahyeong.TripleTride
 {
-
     public class TTRuleContext
     {
-        public delegate int RankComapareFunction(int value1, int value2, System.Comparison<int> aceComparison);
-        public delegate int ReverseFunction(int result);
+        public delegate int Compared(ref int result);
         
-        public System.Comparison<int> rankComapareFunction = TTRule.Compare;
-        public bool reverseRankComparison = false;
+        public System.Comparison<int> rankComaparison = TTRule.Compare;
+        public Compared afterCompareCallback;
+
+        public void ApplyRuleOnMove(TTBoard board, int movedPlayerNumber, int i, int j)
+        {
+            TTCard movedCard = board.slots[i, j];
+
+            foreach (EDirection direction in System.Enum.GetValues(typeof(EDirection)))
+            {
+                TTCard adjacentCard = board.GetCardAt(i, j, direction);
+                if (adjacentCard != null && adjacentCard.ownPlayer != movedPlayerNumber)
+                {
+                    Debug.Log($"Compare with {direction} card");
+                    Debug.Log($"Compare: {movedCard.GetRankOf(direction)}, {adjacentCard.GetOppositeRankOf(direction)}");
+                    bool canTurnCard = CompareRank(movedCard.GetRankOf(direction), adjacentCard.GetOppositeRankOf(direction)) > 0;
+                    if(canTurnCard)
+                    {
+                        adjacentCard.ownPlayer = movedPlayerNumber;
+                    }
+                }
+            }
+        }
 
         public int CompareRank(int value1, int value2)
         {
-            int result = rankComapareFunction(value1, value2);
-            if(reverseRankComparison)
+            int result = rankComaparison(value1, value2);
+            if(afterCompareCallback != null)
             {
-                result = -result;
+                result = afterCompareCallback(ref result);
             }
+            Debug.Log($"Compare result: {result}");
             return result;
         }
 
-        public void ApplyDefaultRules()
+        public void ResetRules()
         {
-            rankComapareFunction = TTRule.Compare;
-            reverseRankComparison = false;
+            rankComaparison = TTRule.Compare;
+            afterCompareCallback = null;
         }
 
         public void ApplyRule(TTRule rule)

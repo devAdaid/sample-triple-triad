@@ -14,9 +14,9 @@ namespace Ahyeong.TripleTride.UI
         {
             slotUIs = new TTSlotUI[boardHeight, boardWidth];
 
-            for (int j = 0; j < boardWidth; j++)
+            for (int i = 0; i < boardHeight; i++)
             {
-                for (int i = 0; i < boardHeight; i++)
+                for (int j = 0; j < boardWidth; j++)
                 {
                     slotUIs[i, j] = Instantiate(slotUIPrefab, slotParent);
                     slotUIs[i, j].InitializeUI(i, j);
@@ -30,7 +30,7 @@ namespace Ahyeong.TripleTride.UI
             {
                 for (int i = 0; i < board.Height; i++)
                 {
-                    slotUIs[i, j].UpdateUI(board.board[i, j]);
+                    slotUIs[i, j].UpdateUI(board.slots[i, j]);
                 }
             }
         }

@@ -48,6 +48,11 @@ namespace Ahyeong.TripleTride
             return gameModel.currentPlayerIndex;
         }
 
+        public bool GetPlayerMoveState(int playerNumber)
+        {
+            return gameModel.currentPlayerIndex == gameModel.players[playerNumber].playerNumber;
+        }
+
         public bool IsCardExistAt(int board_i, int board_j)
         {
             return gameModel.board.IsCardExistAt(board_i, board_j);
@@ -56,6 +61,11 @@ namespace Ahyeong.TripleTride
         #endregion
 
         #region Update Model
+        public void ChangeGameState(EGameState gameState)
+        {
+            
+        }
+
         public void PutCard(TTCard card, int i, int j)
         {
             gameModel.PutCardOnBoard(card, i, j);

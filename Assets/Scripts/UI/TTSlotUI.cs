@@ -7,7 +7,9 @@ namespace Ahyeong.TripleTride.UI
     public class TTSlotUI : MonoBehaviour
     {
         public TTCardUI cardUI;
+        [SerializeField]
         private int _slot_i = 0;
+        [SerializeField]
         private int _slot_j = 0;
 
         public void InitializeUI(int i, int j)

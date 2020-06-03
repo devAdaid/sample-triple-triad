@@ -9,6 +9,7 @@ namespace Ahyeong.TripleTride.UI
     {
         public TTCardUI playerCardUIPrefab;
         public Transform cardParent;
+        public GameObject moveBlocker;
         private TTCardUI[] cardUIs;
 
         public void InitializeUI(TTPlayer player)
@@ -23,13 +24,15 @@ namespace Ahyeong.TripleTride.UI
             }
         }
 
-        public void UpdateUI(TTPlayer player)
+        public void UpdateUI(TTPlayer player, bool canMove)
         {
             int cardCount = player.playerHand.Count;
             for (int i = 0; i < cardCount; i++)
             {
                 cardUIs[i].UpdateUI(player.playerHand[i]);
             }
+
+            moveBlocker.SetActive(!canMove);
         }
     }
 }
