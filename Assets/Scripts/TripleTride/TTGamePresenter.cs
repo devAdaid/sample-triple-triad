@@ -22,7 +22,7 @@ namespace Ahyeong.TripleTride
         public void UpdateAllPlayUI()
         {
             UpdateBoard();
-            for(int playerId = 0; playerId < _gameModel.PlayerCount; playerId++)
+            for (int playerId = 0; playerId < _gameModel.PlayerCount; playerId++)
             {
                 UpdatePlayer(playerId);
             }
@@ -53,9 +53,9 @@ namespace Ahyeong.TripleTride
             _gameModel.ChangeState(state);
         }
 
-        public void PutCard(TTCard card, int i, int j)
+        public void PutCard(TTCard card, int indexOfRow, int indexOfColumn)
         {
-            _gameModel.PutCardOnBoard(card, i, j);
+            _gameModel.PutCardOnBoard(card, indexOfRow, indexOfColumn);
         }
 
         public void ApplyRules(List<TTRule> rules)
@@ -70,9 +70,9 @@ namespace Ahyeong.TripleTride
             return _gameModel.board;
         }
 
-        public TTPlayer GetPlayer(int id)
+        public TTPlayer GetPlayer(int playerId)
         {
-            return _gameModel.GetPlayer(id);
+            return _gameModel.GetPlayer(playerId);
         }
 
         public int GetTotalCardCount()
@@ -95,9 +95,9 @@ namespace Ahyeong.TripleTride
             return _gameModel.IsPlayerInputActive(playerId);
         }
 
-        public bool IsCardExistAt(int index_i, int index_j)
+        public bool IsCardExistAt(int indexOfRow, int indexOfColumn)
         {
-            return _gameModel.board.IsCardExistAt(index_i, index_j);
+            return _gameModel.board.IsCardExistAt(indexOfRow, indexOfColumn);
         }
 
         public List<int> GetWinPlayers()

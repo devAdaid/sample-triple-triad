@@ -15,7 +15,7 @@ namespace Ahyeong.TripleTride.UI
         {
             gameObject.SetActive(true);
 
-            if(winPlayers.Count == 1)
+            if (winPlayers.Count == 1)
             {
                 int winPlayer = winPlayers[0];
                 _resultText.text = $"플레이어 {winPlayer + 1} 승리!";
@@ -47,15 +47,15 @@ namespace Ahyeong.TripleTride.UI
 
         private Color MixColors(List<Color> colors)
         {
-            if(colors == null || colors.Count == 0)
+            if (colors == null || colors.Count == 0)
             {
                 return Color.white;
             }
 
             Color mixedColor = colors[0];
-            for(int i = 1; i < colors.Count; i++)
+            for (int color = 1; color < colors.Count; color++)
             {
-                mixedColor += colors[i];
+                mixedColor += colors[color];
             }
             mixedColor /= colors.Count;
 

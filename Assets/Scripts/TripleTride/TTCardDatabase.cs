@@ -27,7 +27,7 @@ namespace Ahyeong.TripleTride
             int[] candidatesOfIndex = Enumerable.Range(0, _cardData.Length).ToArray();
             int candidateRange = candidatesOfIndex.Length;
 
-            for(int i = 0; i < count; i++)
+            for (int i = 0; i < count; i++)
             {
                 int randomCandidateIndex = Random.Range(0, candidateRange);
                 int newCardIndex = candidatesOfIndex[randomCandidateIndex];

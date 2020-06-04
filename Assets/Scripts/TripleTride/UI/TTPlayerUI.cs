@@ -17,19 +17,19 @@ namespace Ahyeong.TripleTride.UI
             int cardCount = player.handCard.Count;
             _cardUIs = new TTCardUI[cardCount];
             
-            for (int i = 0; i < cardCount; i++)
+            for (int card = 0; card < cardCount; card++)
             {
-                _cardUIs[i] = Instantiate(_playerCardUIPrefab, _cardParent);
-                _cardUIs[i].UpdateUI(player.handCard[i]);
+                _cardUIs[card] = Instantiate(_playerCardUIPrefab, _cardParent);
+                _cardUIs[card].UpdateUI(player.handCard[card]);
             }
         }
 
         public void UpdateUI(TTPlayer player, bool playerInputActive)
         {
             int cardCount = player.handCard.Count;
-            for (int i = 0; i < cardCount; i++)
+            for (int card = 0; card < cardCount; card++)
             {
-                _cardUIs[i].UpdateUI(player.handCard[i]);
+                _cardUIs[card].UpdateUI(player.handCard[card]);
             }
 
             _inputBlocker.SetActive(!playerInputActive);

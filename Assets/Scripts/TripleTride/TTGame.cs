@@ -32,9 +32,9 @@ namespace Ahyeong.TripleTride
         {
             board = new TTBoard(_boardSize, _boardSize, _ruleContext);
             int deckCard = (board.SlotCount + 1) / _playerCount;
-            for(int i = 0; i < _playerCount; i++)
+            for (int playerId = 0; playerId < _playerCount; playerId++)
             {
-                TTPlayer newPlayer = new TTPlayer(i, TTCardDatabase.Instance.GetRandomCardData(deckCard), $"플레이어{i + 1}");
+                TTPlayer newPlayer = new TTPlayer(playerId, TTCardDatabase.Instance.GetRandomCardData(deckCard), $"플레이어{playerId + 1}");
                 players.Add(newPlayer);
                 _usedCards.AddRange(newPlayer.handCard);
             }
@@ -45,9 +45,9 @@ namespace Ahyeong.TripleTride
             _presenter.UpdateAllPlayUI();
         }
 
-        public void PutCardOnBoard(TTCard card, int index_i, int index_j)
+        public void PutCardOnBoard(TTCard card, int indexOfRow, int indexOfColumn)
         {
-            board.PutCard(card, index_i, index_j);
+            board.PutCard(card, indexOfRow, indexOfColumn);
             players[card.belongPlayerId].RemoveCard(card);
 
             if (board.IsBoardFull())
@@ -88,7 +88,7 @@ namespace Ahyeong.TripleTride
             _rules = rules;
             _ruleContext.ResetRules();
 
-            foreach(TTRule rule in _rules)
+            foreach (TTRule rule in _rules)
             {
                 rule.ApplyRuleAt(_ruleContext);
             }
@@ -130,7 +130,7 @@ namespace Ahyeong.TripleTride
             }
 
             List<int> playersHoldingMaxCard = new List<int>();
-            for(int playerId = 0; playerId < PlayerCount; playerId++)
+            for (int playerId = 0; playerId < PlayerCount; playerId++)
             {
                 if (cardCounts[playerId] == maxHoldingCardCount)
                 {

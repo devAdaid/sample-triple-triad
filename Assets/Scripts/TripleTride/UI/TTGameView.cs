@@ -39,9 +39,9 @@ namespace Ahyeong.TripleTride.UI
 
         private void InitializePlayerUI()
         {
-            for(int i = 0; i < _playerUI.Count; i++)
+            for (int playerId = 0; playerId < _playerUI.Count; playerId++)
             {
-                _playerUI[i].InitializeUI(_presenter.GetPlayer(i));
+                _playerUI[playerId].InitializeUI(_presenter.GetPlayer(playerId));
             }
         }
         #endregion
@@ -76,13 +76,13 @@ namespace Ahyeong.TripleTride.UI
         #region User Inputs
         private TTCard _selectedCard = null;
 
-        public void SelectSlot(int slot_i, int slot_j)
+        public void SelectSlot(int indexOfRow, int indexOfColumn)
         {
-            if(_selectedCard != null)
+            if (_selectedCard != null)
             {
-                if (!_presenter.IsCardExistAt(slot_i, slot_j))
+                if (!_presenter.IsCardExistAt(indexOfRow, indexOfColumn))
                 {
-                    _presenter.PutCard(_selectedCard, slot_i, slot_j);
+                    _presenter.PutCard(_selectedCard, indexOfRow, indexOfColumn);
                     _selectedCard = null;
                 }
             }
@@ -90,7 +90,7 @@ namespace Ahyeong.TripleTride.UI
 
         public void SelectCard(TTCard card)
         {
-            if(_presenter.GetCurrentPlayer() == card.belongPlayerId)
+            if (_presenter.GetCurrentPlayer() == card.belongPlayerId)
             {
                 _selectedCard = card;
             }
@@ -109,7 +109,7 @@ namespace Ahyeong.TripleTride.UI
 
         public Color GetCardColorOf(int playerId)
         {
-            if(playerId < _playerUI.Count)
+            if (playerId < _playerUI.Count)
             {
                 return _playerUI[playerId].cardColor;
             }

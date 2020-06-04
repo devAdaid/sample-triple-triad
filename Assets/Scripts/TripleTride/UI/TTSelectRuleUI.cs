@@ -15,10 +15,10 @@ namespace Ahyeong.TripleTride.UI
         {
             gameObject.SetActive(true);
 
-            TTRule[] rules =  { new TTReverseRule(), new TTFallenAceRule()};
+            TTRule[] rules =  { new TTReverseRule(), new TTFallenAceRule() };
 
             var entries = _entryParent.GetComponentsInChildren<TTRuleEntry>();
-            for(int i = 0; i < rules.Length; i++)
+            for (int i = 0; i < rules.Length; i++)
             {
                 TTRuleEntry entry = null;
                 if (i < entries.Length)
@@ -37,7 +37,7 @@ namespace Ahyeong.TripleTride.UI
 
         public void SelectRules()
         {
-            List<TTRule> rules = _ruleEntries.Where(e => e.isSelected).Select(e => e.rule).ToList();
+            List<TTRule> rules = _ruleEntries.Where(entry => entry.isSelected).Select(entry => entry.rule).ToList();
             TTGameView.Instance.SelectRules(rules);
         }
 

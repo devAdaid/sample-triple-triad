@@ -12,23 +12,23 @@ namespace Ahyeong.TripleTride.UI
         {
             slotUIs = new TTSlotUI[boardHeight, boardWidth];
 
-            for (int i = 0; i < boardHeight; i++)
+            for (int row = 0; row < boardHeight; row++)
             {
-                for (int j = 0; j < boardWidth; j++)
+                for (int col = 0; col < boardWidth; col++)
                 {
-                    slotUIs[i, j] = Instantiate(_slotUIPrefab, _slotParent);
-                    slotUIs[i, j].InitializeUI(i, j);
+                    slotUIs[row, col] = Instantiate(_slotUIPrefab, _slotParent);
+                    slotUIs[row, col].InitializeUI(row, col);
                 }
             }
         }
 
         public void UpdateUI(TTBoard board)
         {
-            for (int j = 0; j < board.Width; j++)
+            for (int row = 0; row < board.Height; row++)
             {
-                for (int i = 0; i < board.Height; i++)
+                for (int col = 0; col < board.Width; col++)
                 {
-                    slotUIs[i, j].UpdateUI(board.GetCardAt(i, j));
+                    slotUIs[row, col].UpdateUI(board.GetCardAt(row, col));
                 }
             }
         }

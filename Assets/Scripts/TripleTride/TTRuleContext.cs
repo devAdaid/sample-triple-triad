@@ -19,7 +19,7 @@
                     int movedCardRank = movedCard.GetRankOf(direction);
                     int adjacentCardRank = adjacentCard.GetOppositeRankOf(direction);
                     bool canTurnCard = CompareRank(movedCardRank, adjacentCardRank) > 0;
-                    if(canTurnCard)
+                    if (canTurnCard)
                     {
                         adjacentCard.belongPlayerId = movedPlayerId;
                     }
@@ -30,7 +30,7 @@
         public int CompareRank(int value1, int value2)
         {
             int result = rankComaparison(value1, value2);
-            if(afterCompareCallback != null)
+            if (afterCompareCallback != null)
             {
                 result = afterCompareCallback(ref result);
             }
