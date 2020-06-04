@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Ahyeong.TripleTride
+namespace Ahyeong.TripleTriad
 {
     [System.Serializable]
     public class TTPlayer

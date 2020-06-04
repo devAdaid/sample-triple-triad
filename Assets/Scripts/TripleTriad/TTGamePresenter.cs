@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Ahyeong.TripleTride
+namespace Ahyeong.TripleTriad
 {
     [System.Serializable]
     public class IntEvent : UnityEvent<int> { }

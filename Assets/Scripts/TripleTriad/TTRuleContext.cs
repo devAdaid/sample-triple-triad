@@ -1,4 +1,4 @@
-﻿namespace Ahyeong.TripleTride
+﻿namespace Ahyeong.TripleTriad
 {
     public class TTRuleContext
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace Ahyeong.TripleTride.UI
+namespace Ahyeong.TripleTriad.UI
 {
     public class TTResultUI : MonoBehaviour
     {

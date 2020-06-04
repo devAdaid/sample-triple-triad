@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Ahyeong.TripleTride
+namespace Ahyeong.TripleTriad
 {
     public enum Direction
     {

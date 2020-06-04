@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Ahyeong.TripleTride.UI
+namespace Ahyeong.TripleTriad.UI
 {
     [RequireComponent(typeof(TTCardUI))]
     public class TTCardSelect : MonoBehaviour

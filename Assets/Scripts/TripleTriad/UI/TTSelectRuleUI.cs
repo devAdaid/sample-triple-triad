@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace Ahyeong.TripleTride.UI
+namespace Ahyeong.TripleTriad.UI
 {
     public class TTSelectRuleUI : MonoBehaviour
     {

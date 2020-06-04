@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Ahyeong.TripleTride.UI
+namespace Ahyeong.TripleTriad.UI
 {
     public class TTGameView : MonoSingleton<TTGameView>
     {

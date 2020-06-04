@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Ahyeong.TripleTride
+namespace Ahyeong.TripleTriad
 {
     public enum GameState
     {

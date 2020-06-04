@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace Ahyeong.TripleTride
+namespace Ahyeong.TripleTriad
 {
     public class TTCardDatabase : Singleton<TTCardDatabase>
     {
