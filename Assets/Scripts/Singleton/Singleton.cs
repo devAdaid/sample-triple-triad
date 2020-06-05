@@ -10,11 +10,6 @@
             }
             return _instance;
         }
-
-        set
-        {
-            _instance = value;
-        }
     }
 
     protected static T _instance = null;

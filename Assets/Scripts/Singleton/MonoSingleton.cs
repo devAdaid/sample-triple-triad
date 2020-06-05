@@ -17,13 +17,13 @@ public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
                     T prefab = Resources.Load<T>("Prefabs/Singleton/" + typeof(T).ToString());
                     if (prefab != null)
                     {
-                        Debug.Log("Prefab Singleton Created");
+                        Debug.Log("Prefab Singleton GameObject Created");
                         _instance = Instantiate(prefab) as T;
                         _instance.name = typeof(T).ToString();
                     }
                     else
                     {
-                        Debug.Log("New Singleton Created");
+                        Debug.Log("New Singleton GameObject Created");
                         _instance = new GameObject(typeof(T).ToString(), typeof(T)).GetComponent<T>();
                     }
                 }
