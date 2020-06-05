@@ -7,13 +7,13 @@
         public System.Comparison<int> rankComaparison = TTRule.Compare;
         public Compared afterCompareCallback;
 
-        public void ApplyRuleOnMove(TTBoard board, int movedPlayerId, int index_i, int index_j)
+        public void ApplyRuleOnMove(TTBoard board, int movedPlayerId, int indexOfRow, int indexOfColumn)
         {
-            TTCard movedCard = board.GetCardAt(index_i, index_j);
+            TTCard movedCard = board.GetCardAt(indexOfRow, indexOfColumn);
 
             foreach (Direction direction in System.Enum.GetValues(typeof(Direction)))
             {
-                TTCard adjacentCard = board.GetCardAt(index_i, index_j, direction);
+                TTCard adjacentCard = board.GetCardAt(indexOfRow, indexOfColumn, direction);
                 if (adjacentCard != null && (adjacentCard.belongPlayerId != movedPlayerId) )
                 {
                     int movedCardRank = movedCard.GetRankOf(direction);
